@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:projectakhirtpm/homescreen.dart';
-import 'package:projectakhirtpm/registerpage.dart';
+import 'package:projectakhirtpm/loginpage.dart';
+import 'package:projectakhirtpm/model/user_model.dart';
 
 const color1 = Color(0xff0b2545);
 const color2 = Color(0xff8da9c4);
 const color3 = Color(0xffeef4ed);
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -22,8 +22,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void dispose() {
     Hive.box('users').close();
-    _usernameController.dispose();
-    _passwordController.dispose();
     super.dispose();
   }
 
@@ -38,35 +36,38 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void _processLogin(String username, String password) async {
-    if (!Hive.isBoxOpen('users')) {
-      await Hive.openBox('users');
-    }
+  Future<void> addUser(String email, String password) async {
+    var user = Hive.box("users");
 
-    bool isUserExist =
-        await checkUser(_usernameController.text, _passwordController.text);
+    user.add(User(email, password));
+  }
 
-    if (isUserExist && context.mounted) {
-      SnackBar snackBar = const SnackBar(content: Text("Berhasil Login"));
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
+  void _processRegister(String username, String password) async {
+    if (Hive.isBoxOpen('users')) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => const LoginPage(),
         ),
       );
+      await addUser(_usernameController.text, _passwordController.text);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Either your Email or Password is incorrect!'),
-        ),
-      );
-    }
+      await Hive.openBox('users');
 
-    print(_usernameController.text);
-    print(_passwordController.text);
+      if (context.mounted) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const LoginPage(),
+          ),
+        );
+      }
+      await addUser(_usernameController.text, _passwordController.text);
+    }
+    SnackBar snackBar = const SnackBar(content: Text("Berhasil Register"));
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   Future<bool> checkUser(String mail, String pass) async {
@@ -88,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget titleText() {
     return const Text(
-      'Login',
+      'Registration',
       style: TextStyle(
         fontSize: 28,
         fontWeight: FontWeight.bold,
@@ -97,12 +98,11 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget textField({
-    required TextEditingController controller,
-    required String hintText,
-    required String errorText,
-    required bool obscureText,
-  }) {
+  Widget textField(
+      {required TextEditingController controller,
+      required String hintText,
+      required String errorText,
+      required bool obscureText}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: TextFormField(
@@ -129,11 +129,11 @@ class _LoginPageState extends State<LoginPage> {
           filled: true,
           fillColor: color1,
         ),
-        obscureText: obscureText,
         style: const TextStyle(
           color: color2,
           fontWeight: FontWeight.bold,
         ),
+        obscureText: obscureText,
         validator: (value) => value!.isEmpty ? errorText : null,
         enabled: true,
       ),
@@ -159,10 +159,7 @@ class _LoginPageState extends State<LoginPage> {
         },
         child: Text(
           labelButton,
-          style: const TextStyle(
-            color: color3,
-            fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(fontSize: 15),
         ),
       ),
     );
@@ -201,23 +198,23 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 10),
                   submitButton(
-                    labelButton: 'Login',
+                    labelButton: 'Register',
                     submitCallback: (value) {
                       validateAndSave();
                       String currentUsername = _usernameController.value.text;
                       String currentPassword = _passwordController.value.text;
 
-                      _processLogin(currentUsername, currentPassword);
+                      _processRegister(currentUsername, currentPassword);
                     },
                   ),
                   const SizedBox(height: 10),
-                  const Text('Belum Punya Akun?'),
+                  const Text('Sudah Punya Akun?'),
                   submitButton(
-                    labelButton: 'Register',
+                    labelButton: 'Login',
                     submitCallback: (value) {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const RegisterPage(),
+                          builder: (context) => const LoginPage(),
                         ),
                       );
                     },

@@ -3,8 +3,10 @@ import 'volcanoes_model.dart';
 import 'volcanoescard.dart';
 
 class VolcanoesListScreen extends StatefulWidget {
+  const VolcanoesListScreen({super.key});
+
   @override
-  _VolcanoesListScreenState createState() => _VolcanoesListScreenState();
+  State<VolcanoesListScreen> createState() => _VolcanoesListScreenState();
 }
 
 class _VolcanoesListScreenState extends State<VolcanoesListScreen> {
@@ -20,7 +22,7 @@ class _VolcanoesListScreenState extends State<VolcanoesListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Volcanoes List'),
+        title: const Text('Volcanoes List'),
       ),
       body: FutureBuilder<List<Volcanoes>>(
         future: futureVolcanoes,
@@ -28,7 +30,7 @@ class _VolcanoesListScreenState extends State<VolcanoesListScreen> {
           if (snapshot.hasData) {
             final volcanoes = snapshot.data!;
             return SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
                   for (final volcano in volcanoes)
@@ -40,7 +42,8 @@ class _VolcanoesListScreenState extends State<VolcanoesListScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => VolcanoDetailsScreen(volcano: volcano),
+                              builder: (context) =>
+                                  VolcanoDetailsScreen(volcano: volcano),
                             ),
                           );
                         },
@@ -54,7 +57,7 @@ class _VolcanoesListScreenState extends State<VolcanoesListScreen> {
               child: Text('Error: ${snapshot.error}'),
             );
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }

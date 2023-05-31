@@ -6,7 +6,7 @@ class CurrencyConverterPage extends StatefulWidget {
   const CurrencyConverterPage({Key? key}) : super(key: key);
 
   @override
-  _CurrencyConverterPageState createState() => _CurrencyConverterPageState();
+  State<CurrencyConverterPage> createState() => _CurrencyConverterPageState();
 }
 
 class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
@@ -46,8 +46,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
   void _convertCurrency() {
     final double? amount = double.tryParse(_amountController.text);
     if (amount != null) {
-      final url =
-          Uri.parse('https://api.exchangerate-api.com/v4/latest/IDR');
+      final url = Uri.parse('https://api.exchangerate-api.com/v4/latest/IDR');
       http.get(url).then((response) {
         if (response.statusCode == 200) {
           final jsonResponse = json.decode(response.body);
@@ -103,12 +102,8 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
               child: const Text('Convert'),
             ),
             const SizedBox(height: 16.0),
-            Text(
-              _convertedAmount != null
-                  ? 'Converted Amount: $_convertedAmount $_selectedCurrency'
-                  : '',
-              style: const TextStyle(fontSize: 18.0),
-            ),
+            Text('Converted Amount: $_convertedAmount $_selectedCurrency',
+                style: const TextStyle(fontSize: 18.0)),
           ],
         ),
       ),

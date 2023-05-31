@@ -1,20 +1,15 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:projectakhirtpm/homescreen.dart';
-import 'package:projectakhirtpm/konversi.dart';
-import 'package:projectakhirtpm/waktukonversi.dart';
-// import 'package:projectakhirtpm/widget/camera.dart';
-import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:projectakhirtpm/loginpage.dart';
 import 'model/user_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
+  var appDocumentDirectory = await getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDirectory.path);
   Hive.registerAdapter(UserAdapter());
-
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeScreen(),
+      home: const LoginPage(),
     );
   }
 }

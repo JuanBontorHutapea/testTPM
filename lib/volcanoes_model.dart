@@ -5,7 +5,7 @@ class Volcanoes {
   String? nama;
   String? bentuk;
   String? tinggiMeter;
-  dynamic? estimasiLetusanTerakhir;
+  dynamic estimasiLetusanTerakhir;
   String? geolokasi;
 
   Volcanoes({
@@ -33,7 +33,7 @@ Future<List<Volcanoes>> fetchVolcanoes() async {
 
   if (response.statusCode == 200) {
     final List<dynamic> jsonData = json.decode(response.body);
-    
+
     return jsonData.map((item) => Volcanoes.fromJson(item)).toList();
   } else {
     throw Exception('Failed to fetch volcanoes');

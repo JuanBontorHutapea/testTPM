@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Kalender extends StatefulWidget {
+  const Kalender({super.key});
+
   @override
-  _KalenderState createState() => _KalenderState();
+  State<Kalender> createState() => _KalenderState();
 }
 
 class _KalenderState extends State<Kalender> {
@@ -12,10 +14,10 @@ class _KalenderState extends State<Kalender> {
   int _jamOffset = 0;
   late Timer timer;
 
-  TextEditingController _dateController = TextEditingController();
-  DateFormat _dateFormat = DateFormat("EEEE, dd MMMM yyyy");
+  final TextEditingController _dateController = TextEditingController();
+  final DateFormat _dateFormat = DateFormat("EEEE, dd MMMM yyyy");
   DateTime _currentDate = DateTime.now();
-  DateFormat _timeFormat = DateFormat("HH:mm:ss");
+  final DateFormat _timeFormat = DateFormat("HH:mm:ss");
 
   void _setZonaWaktu(String zonaWaktu) {
     setState(() {
@@ -53,7 +55,8 @@ class _KalenderState extends State<Kalender> {
 
   @override
   void initState() {
-    timer = Timer.periodic(Duration(seconds: 1), (Timer t) => _updateTime());
+    timer =
+        Timer.periodic(const Duration(seconds: 1), (Timer t) => _updateTime());
     super.initState();
   }
 
@@ -61,17 +64,17 @@ class _KalenderState extends State<Kalender> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Menu Kalender'),
+        title: const Text('Menu Kalender'),
       ),
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                Text('Zona Waktu:'),
-                SizedBox(width: 16.0),
+                const Text('Zona Waktu:'),
+                const SizedBox(width: 16.0),
                 DropdownButton<String>(
                   value: _zonaWaktu,
                   items: <String>['WIB', 'WIT', 'WITA', 'LONDON']
@@ -87,15 +90,15 @@ class _KalenderState extends State<Kalender> {
                 ),
               ],
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Text(
               _dateFormat.format(_currentDate),
-              style: TextStyle(fontSize: 24.0),
+              style: const TextStyle(fontSize: 24.0),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextField(
               controller: _dateController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Tanggal (dd/MM/yyyy)',
               ),
               keyboardType: TextInputType.datetime,
@@ -114,10 +117,10 @@ class _KalenderState extends State<Kalender> {
                 }
               },
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Text(
               _timeFormat.format(_currentDate),
-              style: TextStyle(fontSize: 24.0),
+              style: const TextStyle(fontSize: 24.0),
             ),
           ],
         ),

@@ -4,10 +4,10 @@ import 'volcanoes_model.dart';
 class VolcanoDetailsScreen extends StatefulWidget {
   final Volcanoes volcano;
 
-  VolcanoDetailsScreen({required this.volcano});
+  const VolcanoDetailsScreen({super.key, required this.volcano});
 
   @override
-  _VolcanoDetailsScreenState createState() => _VolcanoDetailsScreenState();
+  State<VolcanoDetailsScreen> createState() => _VolcanoDetailsScreenState();
 }
 
 class _VolcanoDetailsScreenState extends State<VolcanoDetailsScreen> {
@@ -15,16 +15,16 @@ class _VolcanoDetailsScreenState extends State<VolcanoDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Volcano Details'),
+        title: const Text('Volcano Details'),
       ),
       body: Container(
         alignment: Alignment.center,
         // height: 300,
         // width: 500,
-        color: Color.fromARGB(213, 0, 0, 0),
+        color: const Color.fromARGB(213, 0, 0, 0),
         padding: const EdgeInsets.all(10.0),
         child: Card(
-          color: Color.fromARGB(248, 227, 69, 7),
+          color: const Color.fromARGB(248, 227, 69, 7),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
