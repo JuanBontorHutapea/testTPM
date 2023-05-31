@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectakhirtpm/database.dart';
 import 'package:projectakhirtpm/logout.dart';
 import 'package:projectakhirtpm/waktukonversi.dart';
 import 'volcanoes.dart';
@@ -86,15 +87,6 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const MemberList()),
-              );
-            },
-            buttonText: 'Daftar Anggota',
-          ),
-          CustomButton(
-            onPressed: () {
-              Navigator.push(
-                context,
                 MaterialPageRoute(
                     builder: (context) => const VolcanoesListScreen()),
               );
@@ -109,6 +101,15 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
             buttonText: 'Waktu',
+          ),
+          CustomButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UserListPage()),
+              );
+            },
+            buttonText: 'Database',
           ),
         ],
       ),

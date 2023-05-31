@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'volcanoes_model.dart';
 
+const color1 = Color(0xff0b2545);
+const color2 = Color(0xff8da9c4);
+const color3 = Color(0xffeef4ed);
+
 class VolcanoDetailsScreen extends StatefulWidget {
   final Volcanoes volcano;
 
@@ -16,19 +20,18 @@ class _VolcanoDetailsScreenState extends State<VolcanoDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Volcano Details'),
+        centerTitle: true,
+        backgroundColor: color1,
       ),
       body: Container(
         alignment: Alignment.center,
-        // height: 300,
-        // width: 500,
-        color: const Color.fromARGB(213, 0, 0, 0),
-        padding: const EdgeInsets.all(10.0),
+        color: color2,
+        padding: const EdgeInsets.fromLTRB(20, 250, 20, 250),
         child: Card(
-          color: const Color.fromARGB(248, 227, 69, 7),
+          color: color3,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:projectakhirtpm/encrypt.dart';
 import 'package:projectakhirtpm/loginpage.dart';
 import 'package:projectakhirtpm/model/user_model.dart';
 
@@ -38,8 +39,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future<void> addUser(String email, String password) async {
     var user = Hive.box("users");
+    String encryptedPassword = CustomEncryption.enrcyptAES(password).toString();
 
-    user.add(User(email, password));
+    user.add(User(email, encryptedPassword));
   }
 
   void _processRegister(String username, String password) async {

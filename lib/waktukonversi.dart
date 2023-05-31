@@ -2,6 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+const color1 = Color(0xff0b2545);
+const color2 = Color(0xff8da9c4);
+const color3 = Color(0xffeef4ed);
+
 class Kalender extends StatefulWidget {
   const Kalender({super.key});
 
@@ -65,6 +69,8 @@ class _KalenderState extends State<Kalender> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Menu Kalender'),
+        centerTitle: true,
+        backgroundColor: color1,
       ),
       body: Container(
         padding: const EdgeInsets.all(16.0),

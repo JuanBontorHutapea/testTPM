@@ -10,36 +10,67 @@ class MemberList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+      decoration: const BoxDecoration(color: color2),
       alignment: Alignment.center,
-      color: color3,
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Daftar Anggota:',
-            style: TextStyle(
-              color: color1,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            const CircleAvatar(
+              backgroundColor: color1,
+              radius: 125,
+              child: CircleAvatar(
+                radius: 120,
+                backgroundImage: AssetImage(
+                  'images/user.jpg',
+                ),
+              ),
             ),
-            textAlign: TextAlign.justify,
-          ),
-          SizedBox(height: 16.0),
-          Text(
-            'Nisrina Athiyya Zain (123200042)',
-            style: TextStyle(
-              color: color1,
-              fontSize: 15,
+            const SizedBox(height: 35),
+            const Text(
+              'Juan Bontor Hutapea',
+              style: TextStyle(
+                  color: color1, fontWeight: FontWeight.bold, fontSize: 20),
             ),
-          ),
-          Text(
-            'Juan Bontor Hutapea (1232000116)',
-            style: TextStyle(
-              color: color1,
-              fontSize: 15,
+            const SizedBox(height: 7),
+            const Text(
+              '123200117',
+              style: TextStyle(
+                  color: color1, fontWeight: FontWeight.w500, fontSize: 18),
             ),
-          ),
-        ],
+            const SizedBox(height: 7),
+            const Text(
+              'Teknologi Pemrograman Mobile IF-C',
+              style: TextStyle(
+                  color: color1, fontWeight: FontWeight.w400, fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 25),
+            Theme(
+              data: ThemeData(
+                dividerTheme: const DividerThemeData(
+                  thickness: 2,
+                  color: color2,
+                ),
+              ),
+              child: const Divider(
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 25),
+            const Text(
+              'Hobby berenang dan bercita-cita menjadi Software Engineer',
+              style: TextStyle(
+                color: color1,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+              textAlign: TextAlign.justify,
+            ),
+          ],
+        ),
       ),
     );
   }

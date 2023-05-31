@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:projectakhirtpm/encrypt.dart';
 import 'package:projectakhirtpm/homescreen.dart';
 import 'package:projectakhirtpm/registerpage.dart';
 
@@ -67,23 +68,6 @@ class _LoginPageState extends State<LoginPage> {
 
     print(_usernameController.text);
     print(_passwordController.text);
-  }
-
-  Future<bool> checkUser(String mail, String pass) async {
-    var user = Hive.box('users');
-    final email = mail;
-    final password = pass;
-
-    final allUsers = user.values.toList();
-    print("alluser : $allUsers");
-
-    final matchingUser = allUsers.any(
-      (user) => user.email == email && user.password == password,
-    );
-
-    print("matching user $matchingUser");
-
-    return matchingUser;
   }
 
   Widget titleText() {
@@ -166,6 +150,32 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Future<bool> checkUser(String mail, String pass) async {
+    var user = Hive.box('users');
+    final email = mail;
+    final password = pass;
+
+    // Fetch all users from the box
+    final allUsers = user.values.toList();
+    print("alluser : $allUsers");
+
+    String encryptedPassword = CustomEncryption.enrcyptAES(password).toString();
+    print("encrypted login : $encryptedPassword");
+
+    // Check if there are matching email and password in the list of users
+    final matchingUser = allUsers.any(
+      (user) => user.email == email && user.password == encryptedPassword,
+    );
+
+    print("matching user $matchingUser");
+
+    if (matchingUser == true) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override
