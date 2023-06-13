@@ -35,6 +35,10 @@ class _VolcanoDetailsScreenState extends State<VolcanoDetailsScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Expanded(
+                    child: Image.asset(
+                        'images/${widget.volcano.nama.toString()}.jpg')),
+                const SizedBox(height: 1),
                 Text('Name: ${widget.volcano.nama ?? ''}'),
                 const SizedBox(height: 8),
                 Text('Shape: ${widget.volcano.bentuk ?? ''}'),

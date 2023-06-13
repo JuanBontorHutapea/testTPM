@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const color1 = Color(0xff0b2545);
 const color2 = Color(0xff8da9c4);
-const color3 = Color(0xffeef4ed);
+// const color3 = Color(0xffeef4ed);
 
 class MemberList extends StatelessWidget {
   const MemberList({super.key});

@@ -2,6 +2,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+const color1 = Color(0xff0b2545);
+const color2 = Color(0xff8da9c4);
+const color3 = Color(0xffeef4ed);
+
 class CurrencyConverterPage extends StatefulWidget {
   const CurrencyConverterPage({Key? key}) : super(key: key);
 
@@ -68,6 +72,8 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Currency Converter'),
+        centerTitle: true,
+        backgroundColor: color1,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -96,10 +102,14 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                 );
               }).toList(),
             ),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: _convertCurrency,
               child: const Text('Convert'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color.fromARGB(
+                    255, 44, 66, 192), // Set the desired color for the button
+              ),
             ),
             const SizedBox(height: 16.0),
             Text('Converted Amount: $_convertedAmount $_selectedCurrency',

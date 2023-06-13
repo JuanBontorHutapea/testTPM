@@ -18,8 +18,12 @@ class Logout extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 20),
+            _helpText('Kesan dan Pesan'),
+            const SizedBox(height: 20),
             _helpText(
-                'Cukup menyenangkan dan seru karena banyaknya tugas yang diberikan.'),
+                'Saran : Materi yang diajarkan sudah sesuai dengan perkembangan bahasa pemrograman mobile'),
+            const SizedBox(height: 20),
+            _helpText('Kesan : Kegiatan belajar yang seru, asik dan menantang'),
             const SizedBox(height: 80),
             _logoutButton(context),
             const SizedBox(height: 20),

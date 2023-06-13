@@ -31,10 +31,10 @@ class _KalenderState extends State<Kalender> {
           _jamOffset = 0;
           break;
         case "WIT":
-          _jamOffset = 1;
+          _jamOffset = 2;
           break;
         case "WITA":
-          _jamOffset = 2;
+          _jamOffset = 1;
           break;
         case "LONDON":
           _jamOffset = -6;

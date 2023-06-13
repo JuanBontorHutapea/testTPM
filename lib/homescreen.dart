@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:projectakhirtpm/database.dart';
 import 'package:projectakhirtpm/logout.dart';
 import 'package:projectakhirtpm/waktukonversi.dart';
+import 'package:projectakhirtpm/konversi.dart';
 import 'volcanoes.dart';
 import 'member_list.dart';
 
 const color1 = Color(0xff0b2545);
-const color2 = Color(0xff8da9c4);
+const color2 = Color.fromARGB(255, 128, 161, 28);
 const color3 = Color(0xffeef4ed);
 
 class HomeScreen extends StatefulWidget {
@@ -57,14 +58,14 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Anggota',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.logout),
-            label: 'Logout',
+            icon: Icon(Icons.info),
+            label: 'Kesan/Pesan',
           ),
         ],
         currentIndex: _selectedIndex,
-        backgroundColor: const Color(0xff0b2545),
+        backgroundColor: Color.fromARGB(255, 61, 74, 59),
         selectedItemColor: const Color(0xffeef4ed),
-        unselectedItemColor: const Color(0xff8da9c4),
+        unselectedItemColor: Color.fromARGB(255, 225, 212, 28),
         showUnselectedLabels: true,
         onTap: _onItemTapped,
       ),
@@ -74,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget homePage(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      color: color3,
+      color: color2,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -101,6 +102,16 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
             buttonText: 'Waktu',
+          ),
+          CustomButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const CurrencyConverterPage()),
+              );
+            },
+            buttonText: 'Konversi',
           ),
           CustomButton(
             onPressed: () {
